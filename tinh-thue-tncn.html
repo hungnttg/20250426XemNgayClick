@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tính Thuế TNCN 2024 | Download phần mềm, tài liệu, xem ngày tốt xấu - download0.com</title>
+  <meta name="description" content="Tính thuế thu nhập cá nhân TNCN theo biểu thuế 2024. Miễn phí, chính xác. Ngoài ra, tải phần mềm, tài liệu, xem giờ tốt, xem ngày tốt, xem ngày cưới, động thổ, đổ mái, nhập quan, hỏa táng, lịch âm dương tại download0.com">
+  <meta name="keywords" content="download phần mềm, download tài liệu, software download, xem giờ tốt, xem ngày tốt, xem ngày cưới, xem ngày động thổ, xem ngày đổ mái, xem ngày đổ trần, xem giờ hỏa táng, xem giờ nhập quan, xem lịch âm, dương lịch, âm lịch, thời gian, tính thuế thu nhập cá nhân, thuế TNCN 2024, máy tính thuế TNCN, công cụ tính thuế online">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Tax Calculator VN">
+  <link rel="canonical" href="https://www.download0.com/tinh-thue-tncn">
+  <meta property="og:title" content="Tính Thuế TNCN 2024 - Download phần mềm, xem ngày tốt xấu - download0.com">
+  <meta property="og:description" content="Tính thuế TNCN miễn phí theo biểu thuế 2024. Cập nhật mới nhất tại download0.com. Ngoài ra, tải phần mềm, tài liệu, xem ngày cưới, động thổ, đổ trần, lịch âm dương.">
+  <meta property="og:url" content="https://www.download0.com/tinh-thue-tncn">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.download0.com/images/tax-thumbnail.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tính Thuế TNCN 2024 | Download phần mềm & Xem ngày tốt - download0.com">
+  <meta name="twitter:description" content="Tính thuế thu nhập cá nhân, tải phần mềm, tài liệu, xem ngày cưới, giờ tốt, nhập quan, đổ mái, lịch âm dương tại download0.com.">
+  <meta name="twitter:image" content="https://www.download0.com/images/tax-thumbnail.jpg">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
+    h1 { color: #333; }
+    .container { background: white; padding: 20px; border-radius: 10px; max-width: 600px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 10px; }
+    input { width: 100%; padding: 8px; margin-top: 5px; font-size: 16px; text-align: right; }
+    button { margin-top: 15px; padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .result, .explanation { margin-top: 20px; background: #e9ecef; padding: 15px; border-radius: 5px; }
+    .result strong, .explanation strong { display: block; margin-top: 10px; }
+    .breakdown { margin-top: 10px; }
+    .error { color: red; margin-top: 10px; font-weight: bold; }
+    nav { text-align: center; margin-bottom: 20px; }
+    nav a { margin: 0 10px; text-decoration: none; color: #007bff; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">Trang chủ</a>
+    <a href="/tinh-thue-tncn">Tính Thuế TNCN</a>
+  </nav>
+  <div class="container">
+    <h1>Tính Thuế Thu Nhập Cá Nhân (TNCN)</h1>
+    <label for="income">Tổng thu nhập năm (triệu VND):</label>
+    <input type="text" id="income" placeholder="Ví dụ: 350.000.000">
+
+    <label for="insurance">Tổng tiền bảo hiểm đã đóng (triệu VND):</label>
+    <input type="text" id="insurance" placeholder="Ví dụ: 8.000.000">
+
+    <label for="dependents">Số người phụ thuộc:</label>
+    <input type="number" id="dependents" min="0">
+
+    <button onclick="calculateTax()">Tính thuế</button>
+
+    <div class="error" id="error"></div>
+    <div class="result" id="result"></div>
+    <div class="explanation" id="explanation"></div>
+  </div>
+
+  <script>
+    function parseNumber(str) {
+      if (!/^[\d.]+(,\d+)?$/.test(str.trim())) return NaN;
+      return parseFloat(str.replaceAll('.', '').replace(',', '.')) / 1e6;
+    }
+
+    function formatNumber(num) {
+      return new Intl.NumberFormat('vi-VN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num);
+    }
+
+    function calculateTax() {
+      const errorEl = document.getElementById("error");
+      errorEl.textContent = "";
+
+      const rawIncome = document.getElementById("income").value;
+      const rawInsurance = document.getElementById("insurance").value;
+
+      const income = parseNumber(rawIncome);
+      const insurance = parseNumber(rawInsurance);
+      const dependents = parseInt(document.getElementById("dependents").value) || 0;
+
+      if (isNaN(income) || isNaN(insurance)) {
+        errorEl.textContent = "Vui lòng nhập đúng định dạng số cho thu nhập và bảo hiểm (ví dụ: 350.000.000).";
+        document.getElementById("result").innerHTML = "";
+        document.getElementById("explanation").innerHTML = "";
+        return;
+      }
+
+      const deductionSelf = 11 * 12;
+      const deductionPerDependent = 4.4 * 12;
+
+      const totalDeduction = deductionSelf + deductionPerDependent * dependents;
+      const taxableIncome = Math.max(0, income - insurance - totalDeduction);
+
+      const brackets = [
+        { limit: 60, rate: 0.05 },
+        { limit: 120, rate: 0.1 },
+        { limit: 216, rate: 0.15 },
+        { limit: 384, rate: 0.2 },
+        { limit: 624, rate: 0.25 },
+        { limit: 960, rate: 0.3 },
+        { limit: Infinity, rate: 0.35 }
+      ];
+
+      let remaining = taxableIncome;
+      let previousLimit = 0;
+      let tax = 0;
+      let breakdown = "";
+
+      for (const bracket of brackets) {
+        if (remaining <= 0) break;
+        const amountAtRate = Math.min(bracket.limit - previousLimit, remaining);
+        const taxAtRate = amountAtRate * bracket.rate;
+        tax += taxAtRate;
+        breakdown += `+ ${formatNumber(amountAtRate)} × ${bracket.rate * 100}% = ${formatNumber(taxAtRate)} triệu đồng<br>`;
+        remaining -= amountAtRate;
+        previousLimit = bracket.limit;
+      }
+
+      document.getElementById("result").innerHTML =
+        taxableIncome > 0
+          ? `<strong>Số tiền thuế phải nộp:</strong> ${formatNumber(tax)} triệu VND`
+          : "<strong>Không phải nộp thuế.</strong>";
+
+      document.getElementById("explanation").innerHTML = `
+        <strong>Giải thích chi tiết:</strong>
+        Tổng thu nhập: <strong>${formatNumber(income)}</strong> triệu đồng.<br>
+        Bảo hiểm đã đóng: <strong>${formatNumber(insurance)}</strong> triệu đồng.<br>
+        Giảm trừ bản thân: <strong>${formatNumber(deductionSelf)}</strong> triệu đồng.<br>
+        Giảm trừ người phụ thuộc (${dependents} người): <strong>${formatNumber(deductionPerDependent * dependents)}</strong> triệu đồng.<br>
+        <strong>Thu nhập tính thuế:</strong> ${formatNumber(taxableIncome)} triệu đồng.<br>
+        <div class="breakdown">
+        <strong>Chi tiết tính thuế:</strong><br>
+        ${breakdown}</div>
+        <em>Thuế TNCN được tính theo biểu thuế lũy tiến từng phần, tức là phần thu nhập nằm trong mỗi khoảng sẽ bị đánh thuế theo mức thuế suất tương ứng.</em>
+      `;
+    }
+  </script>
+</body>
+</html>
