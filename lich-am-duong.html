@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Lịch Âm Dương Tổng Hợp</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      color: #333;
+    }
+    .nav-buttons {
+      margin: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    iframe {
+      width: 90%;
+      height: 600px;
+      border: 1px solid #ccc;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Lịch Âm Dương</h1>
+  <div class="nav-buttons">
+    <button onclick="loadPage('day.html')">Xem Lịch Ngày</button>
+    <button onclick="loadPage('month.html')">Xem Lịch Tháng</button>
+  </div>
+
+  <iframe id="calendarFrame" src="day.html"></iframe>
+
+  <script>
+    function loadPage(page) {
+      document.getElementById('calendarFrame').src = page;
+    }
+  </script>
+
+</body>
+</html>
